@@ -27,17 +27,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(AbstractHttpConfigurer::disable)
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/refugios/**", "/api/animales/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-                .requestMatchers(HttpMethod.POST, "/api/refugios/**", "/api/animales/**").hasAuthority("ROLE_ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/api/refugios/**", "/api/animales/**").hasAuthority("ROLE_ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/api/refugios/**", "/api/animales/**").hasAuthority("ROLE_ADMIN")
-                .anyRequest().authenticated()
-            )
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/refugios", "/api/refugios/**", "/api/animales", "/api/animales/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/refugios", "/api/refugios/**", "/api/animales", "/api/animales/**").hasAnyAuthority("ROLE_ADMIN", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/refugios", "/api/refugios/**", "/api/animales", "/api/animales/**").hasAnyAuthority("ROLE_ADMIN", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/refugios", "/api/refugios/**", "/api/animales", "/api/animales/**").hasAnyAuthority("ROLE_ADMIN", "ADMIN")
+                        .anyRequest().authenticated()
+                )
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

@@ -4,6 +4,7 @@ import cl.ucm.mantenedor.dto.in.RefugioInDTO;
 import cl.ucm.mantenedor.dto.out.RefugioOutDTO;
 import cl.ucm.mantenedor.entity.Refugio;
 import cl.ucm.mantenedor.repository.RefugioRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class RefugioServiceImpl implements RefugioService {
     @Override
     public RefugioOutDTO findById(Long id) {
         Refugio refugio = refugioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Refugio no encontrado"));
+                .orElseThrow(() -> new EntityNotFoundException("Refugio no encontrado"));
         return mapToDTO(refugio);
     }
 

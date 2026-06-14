@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import jakarta.persistence.EntityNotFoundException;
+import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -25,5 +27,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorInfo> handleRuntimeException(RuntimeException ex) {
         ErrorInfo error = new ErrorInfo(409, ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler({EntityNotFoundException.class, NoSuchElementException.class})
+    public ResponseEntity<ErrorInfo> handleNotFoundException(Exception ex) {
+        ErrorInfo error = new ErrorInfo(404, ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }
