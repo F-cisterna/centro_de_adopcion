@@ -12,10 +12,9 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        const parts = decoded.sub ? decoded.sub.split('#') : [];
         setUser({
-          username: parts.length > 1 ? parts[1] : decoded.sub,
-          role: parts.length > 2 ? parts[2] : decoded.roles,
+          username: decoded.sub,
+          role: decoded.roles ? decoded.roles[0] : null, 
         });
       } catch (error) {
         console.error('Error decoding token:', error);
@@ -28,10 +27,9 @@ export const AuthProvider = ({ children }) => {
   const login = (token) => {
     localStorage.setItem('jwt', token);
     const decoded = jwtDecode(token);
-    const parts = decoded.sub ? decoded.sub.split('#') : [];
     setUser({
-      username: parts.length > 1 ? parts[1] : decoded.sub,
-      role: parts.length > 2 ? parts[2] : decoded.roles,
+      username: decoded.sub,
+      role: decoded.roles ? decoded.roles[0] : null,
     });
   };
 
