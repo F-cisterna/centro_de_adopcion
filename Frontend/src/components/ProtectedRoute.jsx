@@ -1,22 +1,20 @@
-import { useContext } from "react";
-import { Navigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
-import { AuthContext } from "../store/auth-context";
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function ProtectedRoute({ children, allowedRoles }) {
-  const { token } = useContext(AuthContext);
+  const { user, loading } = useAuth();
 
-  if (!token) {
+  if (loading) {
+    return <div className="flex h-screen items-center justify-center">Cargando...</div>;
+  }
+
+  if (!user) {
     return <Navigate to="/" replace />;
   }
 
-  if (allowedRoles) {
-    const decoded = jwtDecode(token);
-    const rol = decoded?.sub.split("#")[2];
-
-    if (!allowedRoles.includes(rol)) {
-      return <Navigate to="/no-autorizado" replace />;
-    }
+  if (allowedRoles && !allowedRoles.includes(user.role)) {
+    return <Navigate to="/no-autorizado" replace />;
   }
 
   return children;

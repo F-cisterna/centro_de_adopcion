@@ -1,14 +1,9 @@
-export async function findAllCategoryApi(token){
+import axiosInstance from './axiosConfig';
+
+export async function findAllCategoryApi(){
     try{
-        const res = await fetch(`http://localhost:8085/category`,{
-            method:"GET",
-            headers:{
-                "Content-Type":"application/json",
-                "Authorization":`Bearer ${token}`
-            }
-        });
-        const data = await res.json();
-        return data;
+        const res = await axiosInstance.get('/category');
+        return res.data;
     }catch(error){
         console.log("==START ERROR==")
         console.log(error);
@@ -17,18 +12,10 @@ export async function findAllCategoryApi(token){
     }
 }
 
-export async function saveCategoryApi(json, token){
+export async function saveCategoryApi(json){
     try{
-        const res = await fetch(`http://localhost:8085/category`,{
-            method:"POST",
-            body:JSON.stringify(json),
-            headers:{
-                "Content-Type":"application/json",
-                "Authorization":`Bearer ${token}`
-            }
-        });
-        const data = await res.json();
-        return data;
+        const res = await axiosInstance.post('/category', json);
+        return res.data;
     }catch(error){
         console.log("==START ERROR==")
         console.log(error);

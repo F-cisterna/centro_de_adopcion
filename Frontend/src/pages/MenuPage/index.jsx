@@ -1,16 +1,12 @@
-import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { AuthContext } from "../../store/auth-context"
-import { jwtDecode } from "jwt-decode"
-
+import { useAuth } from "../../context/AuthContext"
 
 function MenuPage(){
     const navigate = useNavigate()
-    const {logout, token} = useContext(AuthContext)
+    const {logout, user} = useAuth()
 
-
-    const [name, setName] = useState(token?jwtDecode(token)?.sub.split('#')[1]:'');
-    const [rol, setRol] = useState(token?jwtDecode(token)?.sub.split('#')[2]:'');
+    const name = user?.username || '';
+    const rol = user?.role || '';
 
     const salir = ()=>{
         logout();
@@ -20,11 +16,10 @@ function MenuPage(){
         navigate('/categoria',{replace:true})
     }
 
-
     return <>
-        <h3>Menu de {name} con rol de {rol}</h3>
-        <button onClick={toCategoria}>Categoria</button>
-        <button onClick={salir}>Salir</button>
+        <h3>Dashboard de {name} con rol de {rol}</h3>
+        <button className="bg-blue-500 text-white p-2 m-2 rounded" onClick={toCategoria}>Categoria</button>
+        <button className="bg-red-500 text-white p-2 m-2 rounded" onClick={salir}>Salir</button>
     </>
 }
 
