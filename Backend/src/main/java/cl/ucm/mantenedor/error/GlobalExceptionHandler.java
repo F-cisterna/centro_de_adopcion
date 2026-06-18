@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.NoSuchElementException;
+import org.springframework.dao.DataIntegrityViolationException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -33,5 +34,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorInfo> handleNotFoundException(Exception ex) {
         ErrorInfo error = new ErrorInfo(404, ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorInfo> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+        ErrorInfo error = new ErrorInfo(409, "El registro no se pudo guardar porque un dato único (como el Email o RUT) ya existe en el sistema.");
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }
 }
