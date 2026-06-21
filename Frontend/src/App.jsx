@@ -7,6 +7,9 @@ import CategoriaPage from './pages/CategoriaPage'
 import CatalogoMascotas from './pages/CatalogoMascotas'
 import GestionRefugios from './pages/admin/GestionRefugios'
 import GestionAnimales from './pages/admin/GestionAnimales'
+import GestionAdoptantes from './pages/admin/GestionAdoptantes'
+import GestionSeguimientos from './pages/admin/GestionSeguimientos'
+import GestionSolicitudes from './pages/GestionSolicitudes'
 import { useAuth } from './context/AuthContext'
 
 const DashboardRedirect = () => {
@@ -28,6 +31,9 @@ function App() {
     {path:'/catalogo', element:<ProtectedRoute allowedRoles={["ROLE_USER"]}><CatalogoMascotas/></ProtectedRoute>},
     {path:'/admin/refugios', element:<ProtectedRoute allowedRoles={["ROLE_ADMIN"]}><GestionRefugios/></ProtectedRoute>},
     {path:'/admin/animales', element:<ProtectedRoute allowedRoles={["ROLE_ADMIN"]}><GestionAnimales/></ProtectedRoute>},
+    {path:'/admin/adoptantes', element:<ProtectedRoute allowedRoles={["ROLE_ADMIN"]}><GestionAdoptantes/></ProtectedRoute>},
+    {path:'/admin/seguimientos', element:<ProtectedRoute allowedRoles={["ROLE_ADMIN"]}><GestionSeguimientos/></ProtectedRoute>},
+    {path:'/solicitudes', element:<ProtectedRoute allowedRoles={["ROLE_ADMIN","ROLE_USER"]}><GestionSolicitudes/></ProtectedRoute>},
     {path:'/categoria', element:<ProtectedRoute allowedRoles={["ROLE_ADMIN","ROLE_USER"]}><CategoriaPage/></ProtectedRoute>},
     {path:'/no-autorizado', element:<h3>No tienes permisos para acceder a esta página</h3>}
   ])

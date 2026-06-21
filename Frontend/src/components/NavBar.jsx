@@ -14,10 +14,16 @@ const NavBar = () => {
             <>
               <Link to="/admin/refugios" className="text-gray-600 hover:text-blue-600 font-medium">Gestión de Refugios</Link>
               <Link to="/admin/animales" className="text-gray-600 hover:text-blue-600 font-medium">Gestión de Animales</Link>
+              <Link to="/admin/adoptantes" className="text-gray-600 hover:text-blue-600 font-medium">Adoptantes</Link>
+              <Link to="/solicitudes" className="text-gray-600 hover:text-blue-600 font-medium">Solicitudes</Link>
+              <Link to="/admin/seguimientos" className="text-gray-600 hover:text-blue-600 font-medium">Seguimientos</Link>
             </>
           )}
           {user?.role === 'ROLE_USER' && (
-            <Link to="/catalogo" className="text-gray-600 hover:text-blue-600 font-medium">Catálogo de Mascotas</Link>
+            <>
+              <Link to="/catalogo" className="text-gray-600 hover:text-blue-600 font-medium">Catálogo de Mascotas</Link>
+              <Link to="/solicitudes" className="text-gray-600 hover:text-blue-600 font-medium">Mis Solicitudes</Link>
+            </>
           )}
         </div>
       </div>
