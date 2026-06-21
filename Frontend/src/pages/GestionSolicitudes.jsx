@@ -35,9 +35,14 @@ const GestionSolicitudes = () => {
         setAnimales(resAni.data);
         setAdoptantes(resAdo.data);
       } else if (user?.role === 'ROLE_USER') {
-        // According to the requirement, user can only read their own, although the backend might already filter it or we just list all GET /api/solicitudes that the user has access to.
+        
         const response = await axiosInstance.get('/api/solicitudes');
-        setSolicitudes(response.data);
+        
+        const misSolicitudes = response.data.filter(
+          s => s.adoptante?.rut === user.username
+        );
+        
+        setSolicitudes(misSolicitudes);
       }
     } catch (error) {
       console.error('Error fetching data:', error);

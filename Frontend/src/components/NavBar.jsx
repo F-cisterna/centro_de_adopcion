@@ -9,7 +9,7 @@ const NavBar = () => {
     <nav className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
       <div className="flex items-center space-x-6">
         <h1 className="text-xl font-bold text-gray-800">Centro Adopción</h1>
-        <div className="hidden md:flex space-x-4">
+        <div className="flex flex-wrap space-x-4">
           {user?.role === 'ROLE_ADMIN' && (
             <>
               <Link to="/admin/refugios" className="text-gray-600 hover:text-blue-600 font-medium">Gestión de Refugios</Link>

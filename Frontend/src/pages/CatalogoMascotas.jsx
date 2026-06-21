@@ -12,10 +12,26 @@ const CatalogoMascotas = () => {
 
   const fetchAnimales = async () => {
     try {
-      const response = await axiosInstance.get('/api/animales');
-      setAnimales(response.data);
+      
+      const [resAnimales, resSolicitudes] = await Promise.all([
+        axiosInstance.get('/api/animales'),
+        axiosInstance.get('/api/solicitudes')
+      ]);
+
+      
+      const animalesAprobadosIds = resSolicitudes.data
+        .filter(sol => sol.estado === 'Aprobada')
+        .map(sol => sol.animal?.id);
+
+      
+      const animalesDisponibles = resAnimales.data.filter(
+        animal => !animalesAprobadosIds.includes(animal.id)
+      );
+
+      // 4. Guardamos la lista limpia en el estado
+      setAnimales(animalesDisponibles);
     } catch (error) {
-      console.error('Error fetching animales:', error);
+      console.error('Error fetching data:', error);
     } finally {
       setLoading(false);
     }
