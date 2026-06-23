@@ -122,10 +122,21 @@ const GestionSolicitudes = () => {
   if (loading) return <div className="min-h-screen bg-gray-50"><NavBar /><div className="p-8 text-center">Cargando solicitudes...</div></div>;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div style={{minHeight: '100vh', backgroundColor: '#FFF8F5'}}>
       <NavBar />
-      <div className="container mx-auto px-4 py-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-8">{user?.role === 'ROLE_ADMIN' ? 'Gestión de Solicitudes' : 'Mis Solicitudes'}</h2>
+
+      <div style={{backgroundColor: '#FFFFFF', borderBottom: '1px solid #F0F0F0', padding: '32px 24px'}}>
+        <div style={{maxWidth: '1280px', margin: '0 auto'}}>
+          <h1 style={{fontFamily: 'Poppins, sans-serif', fontSize: '28px', fontWeight: '800', color: '#1A1A1A', margin: '0 0 6px 0'}}>
+            {user?.role === 'ROLE_ADMIN' ? 'Gestión de Solicitudes' : 'Mis Solicitudes'}
+          </h1>
+          <p style={{fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#AAAAAA', margin: 0}}>
+            {user?.role === 'ROLE_ADMIN' ? 'Administra las solicitudes de adopción' : 'Revisa el estado de tus solicitudes de adopción 🐾'}
+          </p>
+        </div>
+      </div>
+
+      <div style={{maxWidth: '1280px', margin: '0 auto', padding: '32px 24px'}}>
 
         {user?.role === 'ROLE_ADMIN' && (
           <>
@@ -210,26 +221,57 @@ const GestionSolicitudes = () => {
         )}
 
         {user?.role === 'ROLE_USER' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {solicitudes.length === 0 ? (
-              <p className="col-span-full text-center text-gray-500">No tienes solicitudes registradas.</p>
-            ) : (
-              solicitudes.map((s) => (
-                <div key={s.id} className="bg-white rounded-xl shadow-md overflow-hidden p-6 hover:shadow-lg transition-shadow">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold text-gray-800">{s.animal?.nombre}</h3>
-                    {getStatusBadge(s.estado)}
-                  </div>
-                  <div className="space-y-2 text-sm text-gray-600">
-                    <p><span className="font-semibold text-gray-700">Raza:</span> {s.animal?.raza}</p>
-                    <p><span className="font-semibold text-gray-700">Fecha de Solicitud:</span> {s.fechaSolicitud}</p>
-                    {s.observaciones && <p><span className="font-semibold text-gray-700">Notas:</span> {s.observaciones}</p>}
-                  </div>
-                </div>
-              ))
+          <>
+            {/* ESTADO VACÍO — mostrar cuando no hay solicitudes */}
+            {solicitudes.length === 0 && (
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '80px 24px', backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1px solid #F0F0F0'}}>
+                <span style={{fontSize: '64px', marginBottom: '16px', opacity: 0.4}}>🐾</span>
+                <h2 style={{fontFamily: 'Poppins, sans-serif', fontSize: '20px', fontWeight: '700', color: '#1A1A1A', margin: '0 0 8px 0'}}>Aún no tienes solicitudes</h2>
+                <p style={{fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#AAAAAA', margin: '0 0 24px 0', textAlign: 'center'}}>Visita el catálogo y encuentra a tu compañero perfecto</p>
+                <a href="/catalogo" style={{padding: '12px 28px', backgroundColor: '#E8603C', color: '#FFFFFF', borderRadius: '12px', fontFamily: 'Poppins, sans-serif', fontSize: '14px', fontWeight: '600', textDecoration: 'none'}}>Ver Catálogo</a>
+              </div>
             )}
-          </div>
+
+            {/* ESTADO CON SOLICITUDES — mostrar cuando sí hay */}
+            {solicitudes.length > 0 && (
+              <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
+                {solicitudes.map((solicitud) => (
+                  <div key={solicitud.id} style={{backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #F0F0F0', boxShadow: '0 2px 12px rgba(0,0,0,0.04)', padding: '20px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px'}}>
+
+                    <div style={{display: 'flex', alignItems: 'center', gap: '16px'}}>
+                      <div style={{width: '48px', height: '48px', backgroundColor: '#FFF0EC', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0}}>
+                        <span style={{fontSize: '24px'}}>🐾</span>
+                      </div>
+                      <div>
+                        <p style={{fontFamily: 'Poppins, sans-serif', fontSize: '16px', fontWeight: '700', color: '#1A1A1A', margin: '0 0 4px 0'}}>{solicitud.animal?.nombre || 'Animal'}</p>
+                        <p style={{fontFamily: 'Inter, sans-serif', fontSize: '13px', color: '#AAAAAA', margin: 0}}>Solicitud #{solicitud.id} · {new Date(solicitud.fechaSolicitud).toLocaleDateString('es-CL')}</p>
+                      </div>
+                    </div>
+
+                    <div style={{display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0}}>
+                      {solicitud.observaciones && (
+                        <p style={{fontFamily: 'Inter, sans-serif', fontSize: '13px', color: '#888888', margin: 0, maxWidth: '200px'}}>{solicitud.observaciones}</p>
+                      )}
+                      <span style={{
+                        padding: '6px 14px',
+                        borderRadius: '8px',
+                        fontFamily: 'Inter, sans-serif',
+                        fontSize: '12px',
+                        fontWeight: '600',
+                        backgroundColor: solicitud.estado?.toUpperCase() === 'APROBADA' ? '#F0FFF4' : solicitud.estado?.toUpperCase() === 'RECHAZADA' ? '#FFF0F0' : '#FFF8EC',
+                        color: solicitud.estado?.toUpperCase() === 'APROBADA' ? '#16A34A' : solicitud.estado?.toUpperCase() === 'RECHAZADA' ? '#DC2626' : '#D97706'
+                      }}>
+                        {solicitud.estado}
+                      </span>
+                    </div>
+
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
         )}
+
       </div>
     </div>
   );
