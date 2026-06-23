@@ -38,34 +38,76 @@ const CatalogoMascotas = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#FFF8F5]">
       <NavBar />
-      <div className="container mx-auto px-4 py-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Catálogo de Mascotas</h2>
+
+      {/* Page header */}
+      <div className="bg-white border-b border-gray-100 px-6 py-8">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="font-poppins text-2xl font-bold text-gray-900">Catálogo de Mascotas</h1>
+          <p className="text-sm text-gray-500 mt-1">Encuentra a tu compañero perfecto 🐾</p>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="max-w-7xl mx-auto px-6 py-8">
         {loading ? (
-          <p className="text-center text-gray-600">Cargando mascotas...</p>
+          <p className="text-center text-gray-400 text-sm py-16">Cargando mascotas...</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {animales.map((animal) => (
-              <div key={animal.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">{animal.nombre}</h3>
-                  <div className="space-y-2 text-sm text-gray-600">
-                    <p><span className="font-semibold text-gray-700">Especie:</span> {animal.especie}</p>
-                    <p><span className="font-semibold text-gray-700">Raza:</span> {animal.raza}</p>
-                    <p><span className="font-semibold text-gray-700">Tamaño:</span> {animal.tamanio}</p>
-                    <p><span className="font-semibold text-gray-700">Salud:</span> {animal.estadoSalud}</p>
+              <div
+                key={animal.id}
+                className="bg-white rounded-2xl overflow-hidden shadow-[0_2px_16px_rgba(0,0,0,0.06)] border border-gray-100 hover:shadow-[0_4px_24px_rgba(232,96,60,0.12)] hover:border-orange-100 transition-all duration-200"
+              >
+                {/* Image placeholder */}
+                <div className="bg-gradient-to-br from-orange-50 to-amber-50 h-48 flex items-center justify-center">
+                  <span className="text-6xl opacity-30 select-none">🐾</span>
+                </div>
+
+                {/* Card body */}
+                <div className="p-5">
+                  <h3 className="font-poppins font-bold text-gray-900 text-lg mb-3">{animal.nombre}</h3>
+
+                  {/* Attributes grid */}
+                  <div className="grid grid-cols-2 gap-2 mb-4">
+                    <div className="bg-gray-50 rounded-xl p-2.5">
+                      <p className="text-[10px] text-gray-400 uppercase tracking-wide font-medium">Especie</p>
+                      <p className="text-sm text-gray-700 font-medium mt-0.5 capitalize">{animal.especie}</p>
+                    </div>
+                    <div className="bg-gray-50 rounded-xl p-2.5">
+                      <p className="text-[10px] text-gray-400 uppercase tracking-wide font-medium">Raza</p>
+                      <p className="text-sm text-gray-700 font-medium mt-0.5 capitalize">{animal.raza}</p>
+                    </div>
+                    <div className="bg-gray-50 rounded-xl p-2.5">
+                      <p className="text-[10px] text-gray-400 uppercase tracking-wide font-medium">Tamaño</p>
+                      <p className="text-sm text-gray-700 font-medium mt-0.5 capitalize">{animal.tamanio}</p>
+                    </div>
+                    <div className="bg-gray-50 rounded-xl p-2.5">
+                      <p className="text-[10px] text-gray-400 uppercase tracking-wide font-medium">Salud</p>
+                      <p className="text-sm text-gray-700 font-medium mt-0.5 capitalize">{animal.estadoSalud}</p>
+                    </div>
                   </div>
-                  <div className="mt-4 pt-4 border-t border-gray-100">
-                    <p className="text-sm font-medium text-blue-600">
-                      📍 {animal.refugio?.nombre || 'Sin refugio'}
+
+                  {/* Availability badge */}
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex items-center gap-1.5 bg-green-50 text-green-700 text-xs font-medium px-3 py-1.5 rounded-lg">
+                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                      Disponible para adopción
+                    </span>
+                  </div>
+
+                  {/* Shelter info */}
+                  <div className="border-t border-gray-100 mt-4 pt-3">
+                    <p className="text-xs text-gray-400 flex items-center gap-1">
+                      📍 <span className="text-[#E8603C] font-medium">{animal.refugio?.nombre || 'Sin refugio'}</span>
                     </p>
                   </div>
                 </div>
               </div>
             ))}
             {animales.length === 0 && (
-              <p className="col-span-full text-center text-gray-500">No hay mascotas disponibles en este momento.</p>
+              <p className="col-span-full text-center text-gray-400 text-sm py-16">No hay mascotas disponibles en este momento.</p>
             )}
           </div>
         )}
