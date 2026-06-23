@@ -111,15 +111,14 @@ const GestionSolicitudes = () => {
     }
   };
 
-  const getStatusBadge = (estado) => {
-    switch (estado?.toLowerCase()) {
-      case 'aprobada': return <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">Aprobada</span>;
-      case 'rechazada': return <span className="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs font-semibold">Rechazada</span>;
-      default: return <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-semibold">Pendiente</span>;
-    }
-  };
-
-  if (loading) return <div className="min-h-screen bg-gray-50"><NavBar /><div className="p-8 text-center">Cargando solicitudes...</div></div>;
+  if (loading) return (
+    <div style={{minHeight: '100vh', backgroundColor: '#FFF8F5'}}>
+      <NavBar />
+      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '80px 24px', fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#AAAAAA'}}>
+        Cargando solicitudes...
+      </div>
+    </div>
+  );
 
   return (
     <div style={{minHeight: '100vh', backgroundColor: '#FFF8F5'}}>
@@ -131,91 +130,132 @@ const GestionSolicitudes = () => {
             {user?.role === 'ROLE_ADMIN' ? 'Gestión de Solicitudes' : 'Mis Solicitudes'}
           </h1>
           <p style={{fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#AAAAAA', margin: 0}}>
-            {user?.role === 'ROLE_ADMIN' ? 'Administra las solicitudes de adopción' : 'Revisa el estado de tus solicitudes de adopción 🐾'}
+            {user?.role === 'ROLE_ADMIN' ? 'Administra y evalúa las solicitudes de adopción' : 'Revisa el estado de tus solicitudes de adopción 🐾'}
           </p>
         </div>
       </div>
 
-      <div style={{maxWidth: '1280px', margin: '0 auto', padding: '32px 24px'}}>
+      <div style={{maxWidth: '1280px', margin: '0 auto', padding: '32px 24px', display: 'flex', flexDirection: 'column', gap: '24px'}}>
 
         {user?.role === 'ROLE_ADMIN' && (
           <>
-            <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-              <h3 className="text-xl font-semibold mb-4">{editingId ? 'Editar Solicitud' : 'Nueva Solicitud'}</h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* FORMULARIO CREAR / EDITAR */}
+            <div style={{backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1px solid #F0F0F0', boxShadow: '0 2px 16px rgba(0,0,0,0.04)', padding: '28px'}}>
+              <h2 style={{fontFamily: 'Poppins, sans-serif', fontSize: '16px', fontWeight: '700', color: '#1A1A1A', margin: '0 0 20px 0'}}>
+                {editingId ? 'Editar Solicitud' : 'Nueva Solicitud'}
+              </h2>
+              <form onSubmit={handleSubmit}>
+                <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '20px'}}>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Animal</label>
-                    <select name="animalId" value={form.animalId} onChange={handleChange} required className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2 bg-white">
+                    <label style={{display: 'block', fontFamily: 'Inter, sans-serif', fontSize: '11px', fontWeight: '600', color: '#999999', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px'}}>Animal</label>
+                    <select name="animalId" value={form.animalId} onChange={handleChange}
+                      style={{width: '100%', boxSizing: 'border-box', padding: '12px 16px', backgroundColor: '#F9F9F9', border: '1.5px solid #EEEEEE', borderRadius: '12px', fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#1A1A1A', outline: 'none', appearance: 'none'}}>
                       <option value="">Seleccione un animal</option>
-                      {animales.map(a => <option key={a.id} value={a.id}>{a.nombre} ({a.especie})</option>)}
+                      {animales.map((a) => (
+                        <option key={a.id} value={a.id}>{a.nombre} ({a.raza})</option>
+                      ))}
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Adoptante</label>
-                    <select name="adoptanteId" value={form.adoptanteId} onChange={handleChange} required className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2 bg-white">
+                    <label style={{display: 'block', fontFamily: 'Inter, sans-serif', fontSize: '11px', fontWeight: '600', color: '#999999', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px'}}>Adoptante</label>
+                    <select name="adoptanteId" value={form.adoptanteId} onChange={handleChange}
+                      style={{width: '100%', boxSizing: 'border-box', padding: '12px 16px', backgroundColor: '#F9F9F9', border: '1.5px solid #EEEEEE', borderRadius: '12px', fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#1A1A1A', outline: 'none', appearance: 'none'}}>
                       <option value="">Seleccione un adoptante</option>
-                      {adoptantes.map(a => <option key={a.id} value={a.id}>{a.nombreCompleto} - {a.rut}</option>)}
+                      {adoptantes.map((ad) => (
+                        <option key={ad.id} value={ad.id}>{ad.nombreCompleto}</option>
+                      ))}
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Estado</label>
-                    <select name="estado" value={form.estado} onChange={handleChange} required className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2 bg-white">
-                      <option value="Pendiente">Pendiente</option>
-                      <option value="Aprobada">Aprobada</option>
-                      <option value="Rechazada">Rechazada</option>
+                    <label style={{display: 'block', fontFamily: 'Inter, sans-serif', fontSize: '11px', fontWeight: '600', color: '#999999', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px'}}>Estado</label>
+                    <select name="estado" value={form.estado} onChange={handleChange}
+                      style={{width: '100%', boxSizing: 'border-box', padding: '12px 16px', backgroundColor: '#F9F9F9', border: '1.5px solid #EEEEEE', borderRadius: '12px', fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#1A1A1A', outline: 'none', appearance: 'none'}}>
+                      <option value="PENDIENTE">Pendiente</option>
+                      <option value="APROBADA">Aprobada</option>
+                      <option value="RECHAZADA">Rechazada</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Fecha Solicitud</label>
-                    <input type="date" name="fechaSolicitud" value={form.fechaSolicitud} onChange={handleChange} required className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2" />
+                    <label style={{display: 'block', fontFamily: 'Inter, sans-serif', fontSize: '11px', fontWeight: '600', color: '#999999', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px'}}>Fecha Solicitud</label>
+                    <input type="date" name="fechaSolicitud" value={form.fechaSolicitud} onChange={handleChange}
+                      style={{width: '100%', boxSizing: 'border-box', padding: '12px 16px', backgroundColor: '#F9F9F9', border: '1.5px solid #EEEEEE', borderRadius: '12px', fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#1A1A1A', outline: 'none'}}/>
                   </div>
-                  <div className="lg:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700">Observaciones</label>
-                    <input type="text" name="observaciones" value={form.observaciones} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2" />
+                  <div style={{gridColumn: 'span 2'}}>
+                    <label style={{display: 'block', fontFamily: 'Inter, sans-serif', fontSize: '11px', fontWeight: '600', color: '#999999', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px'}}>Observaciones</label>
+                    <input type="text" name="observaciones" value={form.observaciones} onChange={handleChange} placeholder="Observaciones opcionales..."
+                      style={{width: '100%', boxSizing: 'border-box', padding: '12px 16px', backgroundColor: '#F9F9F9', border: '1.5px solid #EEEEEE', borderRadius: '12px', fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#1A1A1A', outline: 'none'}}/>
                   </div>
                 </div>
-                <div className="flex justify-end space-x-2">
-                  {editingId && (
-                    <button type="button" onClick={() => { setEditingId(null); setForm({ fechaSolicitud: new Date().toISOString().split('T')[0], estado: 'Pendiente', observaciones: '', animalId: '', adoptanteId: '' }); }} className="bg-gray-500 text-white px-4 py-2 rounded shadow hover:bg-gray-600 transition-colors">Cancelar</button>
-                  )}
-                  <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition-colors">
-                    {editingId ? 'Actualizar' : 'Crear'}
+                <div style={{display: 'flex', gap: '12px'}}>
+                  <button type="submit"
+                    style={{padding: '12px 28px', backgroundColor: '#E8603C', color: '#FFFFFF', border: 'none', borderRadius: '12px', fontFamily: 'Poppins, sans-serif', fontSize: '14px', fontWeight: '600', cursor: 'pointer'}}>
+                    {editingId ? 'Guardar Cambios' : 'Crear Solicitud'}
                   </button>
+                  {editingId && (
+                    <button type="button" onClick={() => { setEditingId(null); setForm({ fechaSolicitud: new Date().toISOString().split('T')[0], estado: 'Pendiente', observaciones: '', animalId: '', adoptanteId: '' }); }}
+                      style={{padding: '12px 28px', backgroundColor: '#F5F5F5', color: '#666666', border: 'none', borderRadius: '12px', fontFamily: 'Poppins, sans-serif', fontSize: '14px', fontWeight: '600', cursor: 'pointer'}}>
+                      Cancelar
+                    </button>
+                  )}
                 </div>
               </form>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md overflow-hidden overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Animal</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Adoptante</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {solicitudes.map((s) => (
-                    <tr key={s.id}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{s.fechaSolicitud}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">{s.animal?.nombre} ({s.animal?.raza})</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{s.adoptante?.nombreCompleto}</td>
-                      <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(s.estado)}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                        <button onClick={() => handleEdit(s)} className="text-blue-600 hover:text-blue-900">Editar</button>
-                        <select onChange={(e) => handleStateChange(s.id, e.target.value)} value={s.estado} className="ml-2 border border-gray-300 rounded text-xs p-1">
-                          <option value="Pendiente">Pendiente</option>
-                          <option value="Aprobada">Aprobar</option>
-                          <option value="Rechazada">Rechazar</option>
-                        </select>
-                      </td>
+            {/* TABLA DE SOLICITUDES */}
+            <div style={{backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1px solid #F0F0F0', boxShadow: '0 2px 16px rgba(0,0,0,0.04)', overflow: 'hidden'}}>
+              <div style={{padding: '20px 28px', borderBottom: '1px solid #F5F5F5'}}>
+                <h2 style={{fontFamily: 'Poppins, sans-serif', fontSize: '16px', fontWeight: '700', color: '#1A1A1A', margin: 0}}>Solicitudes Registradas</h2>
+              </div>
+              <div style={{overflowX: 'auto'}}>
+                <table style={{width: '100%', borderCollapse: 'collapse'}}>
+                  <thead>
+                    <tr style={{backgroundColor: '#FAFAFA'}}>
+                      {['Fecha', 'Animal', 'Adoptante', 'Estado', 'Acciones'].map((col, i) => (
+                        <th key={i} style={{fontFamily: 'Inter, sans-serif', fontSize: '11px', fontWeight: '600', color: '#AAAAAA', letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: i === 4 ? 'right' : 'left', padding: i === 0 ? '14px 28px' : i === 4 ? '14px 28px' : '14px 20px'}}>{col}</th>
+                      ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {solicitudes.map((solicitud, index) => (
+                      <tr key={solicitud.id} style={{borderTop: '1px solid #F5F5F5', backgroundColor: index % 2 === 0 ? '#FFFFFF' : '#FDFDFB'}}>
+                        <td style={{fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#666666', padding: '16px 28px'}}>
+                          {new Date(solicitud.fechaSolicitud).toLocaleDateString('es-CL')}
+                        </td>
+                        <td style={{padding: '16px 20px'}}>
+                          <p style={{fontFamily: 'Inter, sans-serif', fontSize: '14px', fontWeight: '600', color: '#1A1A1A', margin: '0 0 2px 0'}}>{solicitud.animal?.nombre}</p>
+                          <p style={{fontFamily: 'Inter, sans-serif', fontSize: '12px', color: '#AAAAAA', margin: 0}}>{solicitud.animal?.raza}</p>
+                        </td>
+                        <td style={{fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#666666', padding: '16px 20px'}}>{solicitud.adoptante?.nombreCompleto}</td>
+                        <td style={{padding: '16px 20px'}}>
+                          <span style={{
+                            padding: '4px 12px', borderRadius: '8px', fontFamily: 'Inter, sans-serif', fontSize: '12px', fontWeight: '600',
+                            backgroundColor: solicitud.estado?.toUpperCase() === 'APROBADA' ? '#F0FFF4' : solicitud.estado?.toUpperCase() === 'RECHAZADA' ? '#FFF0F0' : '#FFF8EC',
+                            color: solicitud.estado?.toUpperCase() === 'APROBADA' ? '#16A34A' : solicitud.estado?.toUpperCase() === 'RECHAZADA' ? '#DC2626' : '#D97706'
+                          }}>
+                            {solicitud.estado}
+                          </span>
+                        </td>
+                        <td style={{padding: '16px 28px', textAlign: 'right'}}>
+                          <div style={{display: 'flex', gap: '8px', justifyContent: 'flex-end', alignItems: 'center'}}>
+                            <button onClick={() => handleEdit(solicitud)}
+                              style={{padding: '8px 16px', backgroundColor: '#FFF0EC', color: '#E8603C', border: 'none', borderRadius: '8px', fontFamily: 'Inter, sans-serif', fontSize: '13px', fontWeight: '600', cursor: 'pointer'}}>
+                              Editar
+                            </button>
+                            <select
+                              value={solicitud.estado}
+                              onChange={(e) => handleStateChange(solicitud.id, e.target.value)}
+                              style={{padding: '8px 12px', backgroundColor: '#F9F9F9', border: '1.5px solid #EEEEEE', borderRadius: '8px', fontFamily: 'Inter, sans-serif', fontSize: '13px', color: '#666666', outline: 'none', cursor: 'pointer'}}>
+                              <option value="PENDIENTE">Pendiente</option>
+                              <option value="APROBADA">Aprobar</option>
+                              <option value="RECHAZADA">Rechazar</option>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </>
         )}
