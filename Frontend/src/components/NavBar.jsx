@@ -1,22 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const linkStyle = {
-  padding: '8px 16px',
-  borderRadius: '10px',
-  fontSize: '14px',
-  fontWeight: '500',
-  color: '#666666',
-  backgroundColor: 'transparent',
-  border: 'none',
-  cursor: 'pointer',
-  fontFamily: 'Inter, sans-serif',
-  textDecoration: 'none',
-};
-
 const NavBar = () => {
   const { user, logout } = useAuth();
+  const [hoveredLink, setHoveredLink] = useState(null);
 
   return (
     <nav style={{width: '100%', backgroundColor: '#FFFFFF', borderBottom: '1px solid #F0F0F0', boxShadow: '0 2px 12px rgba(232,96,60,0.07)'}}>
@@ -38,17 +26,17 @@ const NavBar = () => {
         <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
           {user?.role === 'ROLE_ADMIN' && (
             <>
-              <Link to="/admin/refugios" style={linkStyle}>Refugios</Link>
-              <Link to="/admin/animales" style={linkStyle}>Animales</Link>
-              <Link to="/admin/adoptantes" style={linkStyle}>Adoptantes</Link>
-              <Link to="/solicitudes" style={linkStyle}>Solicitudes</Link>
-              <Link to="/admin/seguimientos" style={linkStyle}>Seguimientos</Link>
+              <Link to="/admin/refugios" onMouseEnter={() => setHoveredLink('refugios')} onMouseLeave={() => setHoveredLink(null)} style={{padding: '8px 16px', borderRadius: '10px', fontSize: '14px', fontWeight: '500', fontFamily: 'Inter, sans-serif', textDecoration: 'none', border: 'none', cursor: 'pointer', backgroundColor: hoveredLink === 'refugios' ? '#FFF0EC' : 'transparent', color: hoveredLink === 'refugios' ? '#E8603C' : '#666666', transition: 'all 0.15s ease'}}>Refugios</Link>
+              <Link to="/admin/animales" onMouseEnter={() => setHoveredLink('animales')} onMouseLeave={() => setHoveredLink(null)} style={{padding: '8px 16px', borderRadius: '10px', fontSize: '14px', fontWeight: '500', fontFamily: 'Inter, sans-serif', textDecoration: 'none', border: 'none', cursor: 'pointer', backgroundColor: hoveredLink === 'animales' ? '#FFF0EC' : 'transparent', color: hoveredLink === 'animales' ? '#E8603C' : '#666666', transition: 'all 0.15s ease'}}>Animales</Link>
+              <Link to="/admin/adoptantes" onMouseEnter={() => setHoveredLink('adoptantes')} onMouseLeave={() => setHoveredLink(null)} style={{padding: '8px 16px', borderRadius: '10px', fontSize: '14px', fontWeight: '500', fontFamily: 'Inter, sans-serif', textDecoration: 'none', border: 'none', cursor: 'pointer', backgroundColor: hoveredLink === 'adoptantes' ? '#FFF0EC' : 'transparent', color: hoveredLink === 'adoptantes' ? '#E8603C' : '#666666', transition: 'all 0.15s ease'}}>Adoptantes</Link>
+              <Link to="/solicitudes" onMouseEnter={() => setHoveredLink('solicitudes_admin')} onMouseLeave={() => setHoveredLink(null)} style={{padding: '8px 16px', borderRadius: '10px', fontSize: '14px', fontWeight: '500', fontFamily: 'Inter, sans-serif', textDecoration: 'none', border: 'none', cursor: 'pointer', backgroundColor: hoveredLink === 'solicitudes_admin' ? '#FFF0EC' : 'transparent', color: hoveredLink === 'solicitudes_admin' ? '#E8603C' : '#666666', transition: 'all 0.15s ease'}}>Solicitudes</Link>
+              <Link to="/admin/seguimientos" onMouseEnter={() => setHoveredLink('seguimientos')} onMouseLeave={() => setHoveredLink(null)} style={{padding: '8px 16px', borderRadius: '10px', fontSize: '14px', fontWeight: '500', fontFamily: 'Inter, sans-serif', textDecoration: 'none', border: 'none', cursor: 'pointer', backgroundColor: hoveredLink === 'seguimientos' ? '#FFF0EC' : 'transparent', color: hoveredLink === 'seguimientos' ? '#E8603C' : '#666666', transition: 'all 0.15s ease'}}>Seguimientos</Link>
             </>
           )}
           {user?.role === 'ROLE_USER' && (
             <>
-              <Link to="/catalogo" style={linkStyle}>Catálogo</Link>
-              <Link to="/solicitudes" style={linkStyle}>Mis Solicitudes</Link>
+              <Link to="/catalogo" onMouseEnter={() => setHoveredLink('catalogo')} onMouseLeave={() => setHoveredLink(null)} style={{padding: '8px 16px', borderRadius: '10px', fontSize: '14px', fontWeight: '500', fontFamily: 'Inter, sans-serif', textDecoration: 'none', border: 'none', cursor: 'pointer', backgroundColor: hoveredLink === 'catalogo' ? '#FFF0EC' : 'transparent', color: hoveredLink === 'catalogo' ? '#E8603C' : '#666666', transition: 'all 0.15s ease'}}>Catálogo</Link>
+              <Link to="/solicitudes" onMouseEnter={() => setHoveredLink('mis_solicitudes')} onMouseLeave={() => setHoveredLink(null)} style={{padding: '8px 16px', borderRadius: '10px', fontSize: '14px', fontWeight: '500', fontFamily: 'Inter, sans-serif', textDecoration: 'none', border: 'none', cursor: 'pointer', backgroundColor: hoveredLink === 'mis_solicitudes' ? '#FFF0EC' : 'transparent', color: hoveredLink === 'mis_solicitudes' ? '#E8603C' : '#666666', transition: 'all 0.15s ease'}}>Mis Solicitudes</Link>
             </>
           )}
         </div>

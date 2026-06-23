@@ -113,7 +113,7 @@ const GestionAnimales = () => {
               </div>
               <div>
                 <label style={{display: 'block', fontFamily: 'Inter, sans-serif', fontSize: '11px', fontWeight: '600', color: '#999999', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px'}}>Edad Estimada (años)</label>
-                <input type="number" name="edadEstimada" value={form.edadEstimada} onChange={handleChange} required placeholder="3"
+                <input type="number" name="edadEstimada" min="0" max="30" value={form.edadEstimada} onChange={(e) => setForm({...form, edadEstimada: Math.max(0, Number(e.target.value))})} required placeholder="3"
                   style={{width: '100%', boxSizing: 'border-box', padding: '12px 16px', backgroundColor: '#F9F9F9', border: '1.5px solid #EEEEEE', borderRadius: '12px', fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#1A1A1A', outline: 'none'}}/>
               </div>
               <div>
@@ -193,10 +193,10 @@ const GestionAnimales = () => {
                     <td style={{padding: '16px 20px'}}>
                       <span style={{
                         padding: '4px 12px', borderRadius: '8px', fontFamily: 'Inter, sans-serif', fontSize: '12px', fontWeight: '600',
-                        backgroundColor: animal.estadoSalud === 'SANO' ? '#F0FFF4' : animal.estadoSalud === 'EN_TRATAMIENTO' ? '#FFF8EC' : '#F0F8FF',
-                        color: animal.estadoSalud === 'SANO' ? '#16A34A' : animal.estadoSalud === 'EN_TRATAMIENTO' ? '#D97706' : '#2563EB'
+                        backgroundColor: animal.estadoSalud?.toUpperCase() === 'SANO' ? '#F0FFF4' : animal.estadoSalud?.toUpperCase() === 'EN_TRATAMIENTO' ? '#FFF8EC' : '#F0FFF4',
+                        color: animal.estadoSalud?.toUpperCase() === 'SANO' ? '#16A34A' : animal.estadoSalud?.toUpperCase() === 'EN_TRATAMIENTO' ? '#D97706' : '#16A34A'
                       }}>
-                        {animal.estadoSalud}
+                        {animal.estadoSalud?.toUpperCase() === 'SANO' ? 'Sano' : animal.estadoSalud?.toUpperCase() === 'EN_TRATAMIENTO' ? 'En tratamiento' : animal.estadoSalud}
                       </span>
                     </td>
                     <td style={{fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#666666', padding: '16px 20px'}}>{animal.refugio?.nombre || '—'}</td>
