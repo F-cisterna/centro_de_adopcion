@@ -2,59 +2,71 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+const linkStyle = {
+  padding: '8px 16px',
+  borderRadius: '10px',
+  fontSize: '14px',
+  fontWeight: '500',
+  color: '#666666',
+  backgroundColor: 'transparent',
+  border: 'none',
+  cursor: 'pointer',
+  fontFamily: 'Inter, sans-serif',
+  textDecoration: 'none',
+};
+
 const NavBar = () => {
   const { user, logout } = useAuth();
 
   return (
-    <div className="w-full bg-white border-b border-gray-100 shadow-[0_2px_12px_rgba(232,96,60,0.08)]">
-      <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-        {/* Logo + Title */}
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-[#E8603C] rounded-xl flex items-center justify-center">
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="white">
-              <ellipse cx="7" cy="4.5" rx="2.5" ry="2" />
-              <ellipse cx="17" cy="4.5" rx="2.5" ry="2" />
-              <ellipse cx="3.5" cy="10" rx="2" ry="2.5" />
-              <ellipse cx="20.5" cy="10" rx="2" ry="2.5" />
-              <path d="M12 22c-4 0-7-3-7-6.5 0-3 2.5-5.5 4-7s2-2.5 3-2.5 1.5 1 3 2.5 4 4 4 7c0 3.5-3 6.5-7 6.5z" />
+    <nav style={{width: '100%', backgroundColor: '#FFFFFF', borderBottom: '1px solid #F0F0F0', boxShadow: '0 2px 12px rgba(232,96,60,0.07)'}}>
+      <div style={{maxWidth: '1280px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+
+        <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
+          <div style={{width: '36px', height: '36px', backgroundColor: '#E8603C', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <svg viewBox="0 0 24 24" style={{width: '20px', height: '20px', fill: 'white'}}>
+              <ellipse cx="12" cy="17" rx="5" ry="4"/>
+              <ellipse cx="5" cy="13" rx="2.5" ry="2"/>
+              <ellipse cx="19" cy="13" rx="2.5" ry="2"/>
+              <ellipse cx="8" cy="8" rx="2" ry="2.5"/>
+              <ellipse cx="16" cy="8" rx="2" ry="2.5"/>
             </svg>
           </div>
-          <span className="font-poppins font-bold text-gray-900 text-lg">Centro Adopción</span>
+          <span style={{fontFamily: 'Poppins, sans-serif', fontWeight: '700', fontSize: '17px', color: '#1A1A1A'}}>Centro Adopción</span>
         </div>
 
-        {/* Navigation links */}
-        <nav className="hidden md:flex items-center gap-1">
+        <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
           {user?.role === 'ROLE_ADMIN' && (
             <>
-              <Link to="/admin/refugios" className="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-[#E8603C] hover:bg-orange-50 transition-colors">Refugios</Link>
-              <Link to="/admin/animales" className="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-[#E8603C] hover:bg-orange-50 transition-colors">Animales</Link>
-              <Link to="/admin/adoptantes" className="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-[#E8603C] hover:bg-orange-50 transition-colors">Adoptantes</Link>
-              <Link to="/solicitudes" className="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-[#E8603C] hover:bg-orange-50 transition-colors">Solicitudes</Link>
-              <Link to="/admin/seguimientos" className="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-[#E8603C] hover:bg-orange-50 transition-colors">Seguimientos</Link>
+              <Link to="/admin/refugios" style={linkStyle}>Refugios</Link>
+              <Link to="/admin/animales" style={linkStyle}>Animales</Link>
+              <Link to="/admin/adoptantes" style={linkStyle}>Adoptantes</Link>
+              <Link to="/solicitudes" style={linkStyle}>Solicitudes</Link>
+              <Link to="/admin/seguimientos" style={linkStyle}>Seguimientos</Link>
             </>
           )}
           {user?.role === 'ROLE_USER' && (
             <>
-              <Link to="/catalogo" className="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-[#E8603C] hover:bg-orange-50 transition-colors">Catálogo</Link>
-              <Link to="/solicitudes" className="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-[#E8603C] hover:bg-orange-50 transition-colors">Mis Solicitudes</Link>
+              <Link to="/catalogo" style={linkStyle}>Catálogo</Link>
+              <Link to="/solicitudes" style={linkStyle}>Mis Solicitudes</Link>
             </>
           )}
-        </nav>
+        </div>
 
-        {/* User info + Logout */}
-        <div className="flex items-center gap-3">
-          <span className="hidden sm:inline-block bg-orange-50 text-[#E8603C] text-xs font-medium px-3 py-1.5 rounded-lg">
+        <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
+          <span style={{fontFamily: 'Inter, sans-serif', fontSize: '13px', fontWeight: '500', color: '#E8603C', backgroundColor: '#FFF0EC', padding: '6px 14px', borderRadius: '8px'}}>
             {user?.username}
           </span>
           <button
             onClick={logout}
-            className="px-4 py-2 bg-[#E8603C] hover:bg-[#d14f2b] text-white text-sm font-medium rounded-xl transition-colors"
+            style={{padding: '8px 18px', backgroundColor: '#E8603C', color: '#FFFFFF', border: 'none', borderRadius: '10px', fontFamily: 'Poppins, sans-serif', fontSize: '14px', fontWeight: '600', cursor: 'pointer'}}
           >
             Cerrar Sesión
           </button>
         </div>
+
       </div>
-    </div>
+    </nav>
   );
 };
 
