@@ -63,7 +63,7 @@ function LoginPage() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="adoptante01"
+              placeholder="Ingresa tu rut"
               required
               style={{display: 'block', width: '100%', boxSizing: 'border-box', padding: '14px 16px', backgroundColor: '#F5F5F5', border: '1.5px solid #EEEEEE', borderRadius: '14px', fontFamily: 'Inter, sans-serif', fontSize: '15px', color: '#1A1A1A', outline: 'none'}}
             />
