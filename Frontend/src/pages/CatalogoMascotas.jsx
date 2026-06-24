@@ -76,6 +76,21 @@ const CatalogoMascotas = () => {
     }
   };
 
+  const getImagenAnimal = (animal) => {
+    if (animal.imagen) return animal.imagen;
+    const especie = animal.especie?.toLowerCase() || '';
+    if (especie.includes('perro')) {
+      return 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=600';
+    } else if (especie.includes('gato')) {
+      return 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600';
+    } else if (especie.includes('hamster') || especie.includes('hámster')) {
+      return 'https://images.unsplash.com/photo-1425082661705-1834bfd09dca?auto=format&fit=crop&q=80&w=600';
+    } else if (especie.includes('conejo')) {
+      return 'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&q=80&w=600';
+    }
+    return 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600';
+  };
+
   return (
     <div style={{minHeight: '100vh', backgroundColor: '#FFF8F5'}}>
       <NavBar />
@@ -109,8 +124,14 @@ const CatalogoMascotas = () => {
             {animales.map((animal) => (
               <div key={animal.id} style={{backgroundColor: '#FFFFFF', borderRadius: '20px', overflow: 'hidden', border: '1px solid #F0F0F0', boxShadow: '0 2px 16px rgba(0,0,0,0.05)', transition: 'box-shadow 0.2s ease'}}>
 
-                <div style={{backgroundColor: '#FFF0EC', height: '160px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                  <span style={{fontSize: '64px', opacity: 0.25}}>🐾</span>
+                <div style={{backgroundColor: '#FFF0EC', height: '220px', width: '100%', overflow: 'hidden', position: 'relative'}}>
+                  <img 
+                    src={getImagenAnimal(animal)} 
+                    alt={animal.nombre} 
+                    style={{width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s ease'}}
+                    onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                    onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                  />
                 </div>
 
                 <div style={{padding: '20px'}}>
