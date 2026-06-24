@@ -32,8 +32,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/refugios", "/api/refugios/**", "/api/animales", "/api/animales/**", "/api/solicitudes", "/api/solicitudes/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "USER", "ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/refugios", "/api/refugios/**", "/api/animales", "/api/animales/**", "/api/solicitudes", "/api/solicitudes/**").hasAnyAuthority("ROLE_ADMIN", "ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/refugios", "/api/refugios/**", "/api/animales", "/api/animales/**", "/api/solicitudes", "/api/solicitudes/**").hasAnyAuthority("ROLE_ADMIN", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/solicitudes", "/api/solicitudes/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/refugios", "/api/refugios/**", "/api/animales", "/api/animales/**").hasAnyAuthority("ROLE_ADMIN", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/solicitudes", "/api/solicitudes/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "USER", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/refugios", "/api/refugios/**", "/api/animales", "/api/animales/**").hasAnyAuthority("ROLE_ADMIN", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/refugios", "/api/refugios/**", "/api/animales", "/api/animales/**", "/api/solicitudes", "/api/solicitudes/**").hasAnyAuthority("ROLE_ADMIN", "ADMIN")
 
                         .requestMatchers("/api/adoptantes", "/api/adoptantes/**", "/api/seguimientos", "/api/seguimientos/**").hasAnyAuthority("ROLE_ADMIN", "ADMIN")
