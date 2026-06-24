@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { loginApi } from "../../api";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -9,6 +9,21 @@ function LoginPage() {
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
   const { login } = useAuth();
+  const errorTimerRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (errorTimerRef.current) clearTimeout(errorTimerRef.current);
+    };
+  }, []);
+
+  const showError = (msg) => {
+    if (errorTimerRef.current) clearTimeout(errorTimerRef.current);
+    setErrorMsg(msg);
+    errorTimerRef.current = setTimeout(() => {
+      setErrorMsg("");
+    }, 4000);
+  };
 
   const loginAction = async (e) => {
     e.preventDefault();
@@ -19,10 +34,9 @@ function LoginPage() {
       login(resp.token);
       navigate("/dashboard", { replace: true });
     } else if (resp?.error) {
-      // Assuming ErrorInfo structure has 'message'
-      setErrorMsg(resp.error.message || "Error en las credenciales");
+      showError(resp.error.message || "Error en las credenciales");
     } else {
-      setErrorMsg("Ocurrió un error inesperado");
+      showError("Ocurrió un error inesperado");
     }
   };
 
