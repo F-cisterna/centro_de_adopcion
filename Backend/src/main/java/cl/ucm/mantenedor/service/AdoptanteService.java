@@ -10,4 +10,5 @@ public interface AdoptanteService {
     List<AdoptanteOutDTO> getAllAdoptantes();
     AdoptanteOutDTO updateAdoptante(Long id, AdoptanteInDTO dto);
     void deleteAdoptante(Long id);
+    AdoptanteOutDTO getAdoptanteByRut(String rut);
 }

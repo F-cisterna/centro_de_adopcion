@@ -46,4 +46,10 @@ public class AdoptanteController {
         service.deleteAdoptante(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/buscar/rut/{rut}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    public ResponseEntity<AdoptanteOutDTO> getAdoptanteByRut(@PathVariable String rut) {
+        return ResponseEntity.ok(service.getAdoptanteByRut(rut));
+    }
 }

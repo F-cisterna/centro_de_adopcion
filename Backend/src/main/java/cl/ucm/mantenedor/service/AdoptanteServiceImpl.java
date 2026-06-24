@@ -79,6 +79,13 @@ public class AdoptanteServiceImpl implements AdoptanteService {
         repository.deleteById(id);
     }
 
+    @Override
+    public AdoptanteOutDTO getAdoptanteByRut(String rut) {
+        return repository.findByRut(rut)
+                .map(this::toDTO)
+                .orElseThrow(() -> new EntityNotFoundException("Adoptante no encontrado con RUT: " + rut));
+    }
+
     private AdoptanteOutDTO toDTO(Adoptante adoptante) {
         AdoptanteOutDTO dto = new AdoptanteOutDTO();
         dto.setId(adoptante.getId());

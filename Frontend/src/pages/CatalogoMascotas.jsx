@@ -49,10 +49,12 @@ const CatalogoMascotas = () => {
     setMensajeExito('');
     setMensajeError('');
     try {
-      const resAdoptantes = await axiosInstance.get('/api/adoptantes');
-      const adoptante = resAdoptantes.data.find(a => a.rut === user.username);
-      if (!adoptante) {
-        setMensajeError('No se encontró tu perfil de adoptante. Contacta al administrador.');
+      let adoptante;
+      try {
+        const resAdoptante = await axiosInstance.get(`/api/adoptantes/buscar/rut/${user.username}`);
+        adoptante = resAdoptante.data;
+      } catch (e) {
+        setMensajeError('No se encontró tu perfil de adoptante. Contacta al administrador para que te registre.');
         setAdoptandoId(null);
         return;
       }
