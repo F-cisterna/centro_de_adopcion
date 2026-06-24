@@ -38,6 +38,8 @@ public class SecurityConfig {
 
                         .requestMatchers("/api/adoptantes", "/api/adoptantes/**", "/api/seguimientos", "/api/seguimientos/**").hasAnyAuthority("ROLE_ADMIN", "ADMIN")
 
+                        .requestMatchers("/api/adoptantes-user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "USER", "ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
