@@ -7,8 +7,15 @@ const NavBar = () => {
   const [hoveredLink, setHoveredLink] = useState(null);
 
   return (
-    <nav style={{width: '100%', backgroundColor: '#FFFFFF', borderBottom: '1px solid #F0F0F0', boxShadow: '0 2px 12px rgba(232,96,60,0.07)'}}>
-      <div style={{maxWidth: '1280px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+    <nav style={{width: '100%', backgroundColor: '#FFFFFF', borderBottom: '1px solid #F0F0F0', boxShadow: '0 2px 12px rgba(232,96,60,0.07)', position: 'relative', overflow: 'hidden'}}>
+      {/* Patitas decorativas en el NavBar */}
+      <span style={{position: 'absolute', top: '15px', left: '3%', fontSize: '24px', opacity: 0.06, transform: 'rotate(-15deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
+      <span style={{position: 'absolute', top: '10px', left: '18%', fontSize: '24px', opacity: 0.05, transform: 'rotate(15deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
+      <span style={{position: 'absolute', top: '25px', left: '28%', fontSize: '18px', opacity: 0.05, transform: 'rotate(-20deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
+      <span style={{position: 'absolute', top: '15px', right: '30%', fontSize: '22px', opacity: 0.05, transform: 'rotate(25deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
+      <span style={{position: 'absolute', top: '25px', right: '22%', fontSize: '18px', opacity: 0.05, transform: 'rotate(-10deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
+
+      <div style={{maxWidth: '1280px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative', zIndex: 1}}>
 
         <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
           <div style={{width: '36px', height: '36px', backgroundColor: '#E8603C', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>

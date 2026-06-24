@@ -113,8 +113,17 @@ const CatalogoMascotas = () => {
     <div style={{minHeight: '100vh', backgroundColor: '#FFF8F5'}}>
       <NavBar />
 
-      <div style={{backgroundColor: '#FFFFFF', borderBottom: '1px solid #F0F0F0', padding: '32px 24px'}}>
-        <div style={{maxWidth: '1280px', margin: '0 auto'}}>
+      <div style={{backgroundColor: '#FFFFFF', borderBottom: '1px solid #F0F0F0', padding: '32px 24px', position: 'relative', overflow: 'hidden'}}>
+        {/* Patitas decorativas en el bloque del título */}
+        <span style={{position: 'absolute', top: '20px', right: '10%', fontSize: '48px', opacity: 0.06, transform: 'rotate(15deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
+        <span style={{position: 'absolute', bottom: '15px', right: '20%', fontSize: '36px', opacity: 0.05, transform: 'rotate(-20deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
+        <span style={{position: 'absolute', top: '15px', right: '32%', fontSize: '42px', opacity: 0.05, transform: 'rotate(25deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
+        <span style={{position: 'absolute', bottom: '20px', right: '45%', fontSize: '32px', opacity: 0.04, transform: 'rotate(-10deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
+        <span style={{position: 'absolute', top: '12px', left: '35%', fontSize: '38px', opacity: 0.04, transform: 'rotate(12deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
+        <span style={{position: 'absolute', top: '35px', left: '45%', fontSize: '45px', opacity: 0.05, transform: 'rotate(-15deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
+        <span style={{position: 'absolute', bottom: '10px', left: '5%', fontSize: '40px', opacity: 0.05, transform: 'rotate(-25deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
+
+        <div style={{maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1}}>
           <h1 style={{fontFamily: 'Poppins, sans-serif', fontSize: '28px', fontWeight: '800', color: '#1A1A1A', margin: '0 0 6px 0'}}>Catálogo de Mascotas</h1>
           <p style={{fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#AAAAAA', margin: 0}}>Encuentra a tu compañero perfecto 🐾</p>
         </div>
