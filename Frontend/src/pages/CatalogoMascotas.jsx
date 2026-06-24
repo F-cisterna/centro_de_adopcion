@@ -26,7 +26,7 @@ const CatalogoMascotas = () => {
 
       
       const animalesAprobadosIds = resSolicitudes.data
-        .filter(sol => sol.estado === 'Aprobada')
+        .filter(sol => sol.estado?.toUpperCase() === 'APROBADA')
         .map(sol => sol.animal?.id);
 
       
