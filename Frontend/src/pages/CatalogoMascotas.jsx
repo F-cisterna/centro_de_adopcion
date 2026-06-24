@@ -90,8 +90,8 @@ const CatalogoMascotas = () => {
     } else if (especie.includes('conejo')) {
       return 'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&q=80&w=600';
     } else if (especie.includes('dragon') || especie.includes('dragón')) {
-      // Imagen espectacular de un dragón / reptil majestuoso
-      return 'https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?auto=format&fit=crop&q=80&w=600';
+      // Imagen estática y 100% garantizada de un Dragón Barbudo (Wikimedia Commons)
+      return 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Pogona_vitticeps02.JPG/800px-Pogona_vitticeps02.JPG';
     } else if (especie.includes('tortuga')) {
       return 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&q=80&w=600';
     } else if (especie.includes('ave') || especie.includes('pajaro') || especie.includes('pájaro') || especie.includes('loro')) {
