@@ -17,7 +17,7 @@ public class JwtUtil {
 
     private final String secretKey;
     private final Algorithm algorithm;
-    private static final long EXPIRATION_TIME = 86400000; // 24 hours
+    private static final long EXPIRATION_TIME = 86400000;
 
     public JwtUtil() {
         SecureRandom random = new SecureRandom();
