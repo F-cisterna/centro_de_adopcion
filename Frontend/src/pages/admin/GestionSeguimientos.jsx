@@ -25,7 +25,6 @@ const GestionSeguimientos = () => {
         axiosInstance.get('/api/solicitudes')
       ]);
       setSeguimientos(resSeg.data);
-      // Solo mostramos las aprobadas en el select de creación, pero traemos todas para la tabla
       setSolicitudes(resSol.data.filter(s => s.estado.toLowerCase() === 'aprobada'));
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -89,7 +88,7 @@ const GestionSeguimientos = () => {
 
       <div style={{maxWidth: '1280px', margin: '0 auto', padding: '32px 24px', display: 'flex', flexDirection: 'column', gap: '24px'}}>
 
-        {/* FORMULARIO CREAR / EDITAR */}
+
         <div style={{backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1px solid #F0F0F0', boxShadow: '0 2px 16px rgba(0,0,0,0.04)', padding: '28px'}}>
           <h2 style={{fontFamily: 'Poppins, sans-serif', fontSize: '16px', fontWeight: '700', color: '#1A1A1A', margin: '0 0 20px 0'}}>
             {editingId ? 'Editar Seguimiento' : 'Nuevo Seguimiento'}
@@ -139,7 +138,7 @@ const GestionSeguimientos = () => {
           </form>
         </div>
 
-        {/* TABLA DE SEGUIMIENTOS */}
+
         <div style={{backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1px solid #F0F0F0', boxShadow: '0 2px 16px rgba(0,0,0,0.04)', overflow: 'hidden'}}>
           <div style={{padding: '20px 28px', borderBottom: '1px solid #F5F5F5'}}>
             <h2 style={{fontFamily: 'Poppins, sans-serif', fontSize: '16px', fontWeight: '700', color: '#1A1A1A', margin: 0}}>Seguimientos Registrados</h2>

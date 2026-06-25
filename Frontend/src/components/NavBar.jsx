@@ -8,7 +8,7 @@ const NavBar = () => {
 
   return (
     <nav style={{width: '100%', backgroundColor: '#FFFFFF', borderBottom: '1px solid #F0F0F0', boxShadow: '0 2px 12px rgba(232,96,60,0.07)', position: 'relative', overflow: 'hidden'}}>
-      {/* Patitas decorativas en el NavBar */}
+
       <span style={{position: 'absolute', top: '15px', left: '3%', fontSize: '24px', opacity: 0.06, transform: 'rotate(-15deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
       <span style={{position: 'absolute', top: '10px', left: '18%', fontSize: '24px', opacity: 0.05, transform: 'rotate(15deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
       <span style={{position: 'absolute', top: '25px', left: '28%', fontSize: '18px', opacity: 0.05, transform: 'rotate(-20deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>

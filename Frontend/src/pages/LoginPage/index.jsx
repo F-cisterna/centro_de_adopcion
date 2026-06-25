@@ -43,7 +43,7 @@ function LoginPage() {
   return (
     <div style={{minHeight: '100vh', backgroundColor: '#FFF8F5', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden', padding: '16px'}}>
 
-      {/* Patitas Capa 1: Superior extrema (6 patitas) */}
+
       <span style={{position: 'absolute', top: '4%', left: '5%', fontSize: '72px', opacity: 0.06, transform: 'rotate(-15deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
       <span style={{position: 'absolute', top: '8%', left: '22%', fontSize: '42px', opacity: 0.05, transform: 'rotate(15deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
       <span style={{position: 'absolute', top: '3%', left: '38%', fontSize: '48px', opacity: 0.04, transform: 'rotate(-10deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
@@ -51,7 +51,7 @@ function LoginPage() {
       <span style={{position: 'absolute', top: '7%', right: '22%', fontSize: '54px', opacity: 0.06, transform: 'rotate(-20deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
       <span style={{position: 'absolute', top: '5%', right: '6%', fontSize: '64px', opacity: 0.06, transform: 'rotate(12deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
 
-      {/* Patitas Capa 2: Media-alta (6 patitas) */}
+
       <span style={{position: 'absolute', top: '25%', left: '8%', fontSize: '50px', opacity: 0.05, transform: 'rotate(-25deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
       <span style={{position: 'absolute', top: '18%', left: '15%', fontSize: '35px', opacity: 0.04, transform: 'rotate(20deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
       <span style={{position: 'absolute', top: '28%', left: '26%', fontSize: '38px', opacity: 0.04, transform: 'rotate(30deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
@@ -59,7 +59,7 @@ function LoginPage() {
       <span style={{position: 'absolute', top: '26%', right: '25%', fontSize: '45px', opacity: 0.04, transform: 'rotate(-15deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
       <span style={{position: 'absolute', top: '24%', right: '9%', fontSize: '56px', opacity: 0.05, transform: 'rotate(25deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
 
-      {/* Patitas Capa 3: Zona central lateral (6 patitas) */}
+
       <span style={{position: 'absolute', top: '46%', left: '3%', fontSize: '48px', opacity: 0.05, transform: 'rotate(10deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
       <span style={{position: 'absolute', top: '40%', left: '20%', fontSize: '44px', opacity: 0.04, transform: 'rotate(-15deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
       <span style={{position: 'absolute', top: '52%', left: '25%', fontSize: '36px', opacity: 0.04, transform: 'rotate(25deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
@@ -67,7 +67,7 @@ function LoginPage() {
       <span style={{position: 'absolute', top: '54%', right: '22%', fontSize: '46px', opacity: 0.05, transform: 'rotate(15deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
       <span style={{position: 'absolute', top: '45%', right: '4%', fontSize: '52px', opacity: 0.05, transform: 'rotate(-10deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
 
-      {/* Patitas Capa 4: Media-baja (6 patitas) */}
+
       <span style={{position: 'absolute', top: '65%', left: '12%', fontSize: '60px', opacity: 0.06, transform: 'rotate(20deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
       <span style={{position: 'absolute', top: '76%', left: '18%', fontSize: '45px', opacity: 0.05, transform: 'rotate(-10deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
       <span style={{position: 'absolute', top: '60%', left: '28%', fontSize: '42px', opacity: 0.05, transform: 'rotate(-10deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
@@ -75,7 +75,7 @@ function LoginPage() {
       <span style={{position: 'absolute', top: '74%', right: '20%', fontSize: '42px', opacity: 0.04, transform: 'rotate(30deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
       <span style={{position: 'absolute', top: '64%', right: '11%', fontSize: '48px', opacity: 0.06, transform: 'rotate(-15deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
 
-      {/* Patitas Capa 5: Inferior extrema (6 patitas) */}
+
       <span style={{position: 'absolute', bottom: '7%', left: '6%', fontSize: '64px', opacity: 0.06, transform: 'rotate(10deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
       <span style={{position: 'absolute', bottom: '14%', left: '22%', fontSize: '48px', opacity: 0.05, transform: 'rotate(-10deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>
       <span style={{position: 'absolute', bottom: '4%', left: '38%', fontSize: '45px', opacity: 0.04, transform: 'rotate(15deg)', userSelect: 'none', pointerEvents: 'none', lineHeight: 1}}>🐾</span>

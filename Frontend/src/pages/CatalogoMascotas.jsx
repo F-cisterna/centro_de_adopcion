@@ -34,7 +34,6 @@ const CatalogoMascotas = () => {
         animal => !animalesAprobadosIds.includes(animal.id)
       );
 
-      // 4. Guardamos la lista limpia en el estado
       setAnimales(animalesDisponibles);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -80,7 +79,6 @@ const CatalogoMascotas = () => {
     if (animal.imagen) return animal.imagen;
     const especie = animal.especie?.toLowerCase().trim() || '';
     
-    // 1. Catálogo curado de alta calidad para especies comunes y exóticas conocidas
     if (especie.includes('perro') || especie.includes('perra')) {
       return 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=600';
     } else if (especie.includes('gato') || especie.includes('gata')) {
@@ -90,7 +88,6 @@ const CatalogoMascotas = () => {
     } else if (especie.includes('conejo')) {
       return 'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&q=80&w=600';
     } else if (especie.includes('dragon') || especie.includes('dragón')) {
-      // Imagen estática y 100% garantizada de un Dragón Barbudo (Wikimedia Commons)
       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Pogona_vitticeps02.JPG/800px-Pogona_vitticeps02.JPG';
     } else if (especie.includes('tortuga')) {
       return 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&q=80&w=600';
@@ -100,12 +97,10 @@ const CatalogoMascotas = () => {
       return 'https://images.unsplash.com/photo-1534103236750-c8f3074003d1?auto=format&fit=crop&q=80&w=600';
     }
     
-    // 2. Búsqueda verdaderamente dinámica por palabra clave para cualquier otra especie en el mundo
     if (especie) {
       return `https://loremflickr.com/600/400/${encodeURIComponent(especie)}?lock=${animal.id || 1}`;
     }
 
-    // Fallback final si no especificaron especie
     return 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600';
   };
 
@@ -114,7 +109,7 @@ const CatalogoMascotas = () => {
       <NavBar />
 
       <div style={{backgroundColor: '#FFFFFF', borderBottom: '1px solid #F0F0F0', padding: '32px 24px', position: 'relative', overflow: 'hidden'}}>
-        {/* Patitas decorativas en el bloque del título */}
+
         <span style={{position: 'absolute', top: '20px', right: '10%', fontSize: '48px', opacity: 0.06, transform: 'rotate(15deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
         <span style={{position: 'absolute', bottom: '15px', right: '20%', fontSize: '36px', opacity: 0.05, transform: 'rotate(-20deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>
         <span style={{position: 'absolute', top: '15px', right: '32%', fontSize: '42px', opacity: 0.05, transform: 'rotate(25deg)', userSelect: 'none', pointerEvents: 'none'}}>🐾</span>

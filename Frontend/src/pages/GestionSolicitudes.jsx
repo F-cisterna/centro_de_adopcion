@@ -139,7 +139,7 @@ const GestionSolicitudes = () => {
 
         {user?.role === 'ROLE_ADMIN' && (
           <>
-            {/* FORMULARIO CREAR / EDITAR */}
+
             <div style={{backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1px solid #F0F0F0', boxShadow: '0 2px 16px rgba(0,0,0,0.04)', padding: '28px'}}>
               <h2 style={{fontFamily: 'Poppins, sans-serif', fontSize: '16px', fontWeight: '700', color: '#1A1A1A', margin: '0 0 20px 0'}}>
                 {editingId ? 'Editar Solicitud' : 'Nueva Solicitud'}
@@ -201,7 +201,7 @@ const GestionSolicitudes = () => {
               </form>
             </div>
 
-            {/* TABLA DE SOLICITUDES */}
+
             <div style={{backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1px solid #F0F0F0', boxShadow: '0 2px 16px rgba(0,0,0,0.04)', overflow: 'hidden'}}>
               <div style={{padding: '20px 28px', borderBottom: '1px solid #F5F5F5'}}>
                 <h2 style={{fontFamily: 'Poppins, sans-serif', fontSize: '16px', fontWeight: '700', color: '#1A1A1A', margin: 0}}>Solicitudes Registradas</h2>
@@ -262,7 +262,7 @@ const GestionSolicitudes = () => {
 
         {user?.role === 'ROLE_USER' && (
           <>
-            {/* ESTADO VACÍO — mostrar cuando no hay solicitudes */}
+
             {solicitudes.length === 0 && (
               <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '80px 24px', backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1px solid #F0F0F0'}}>
                 <span style={{fontSize: '64px', marginBottom: '16px', opacity: 0.4}}>🐾</span>
@@ -272,7 +272,7 @@ const GestionSolicitudes = () => {
               </div>
             )}
 
-            {/* ESTADO CON SOLICITUDES — mostrar cuando sí hay */}
+
             {solicitudes.length > 0 && (
               <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
                 {solicitudes.map((solicitud) => (

@@ -28,7 +28,6 @@ public class AdoptanteServiceImpl implements AdoptanteService {
     @Transactional
     public AdoptanteOutDTO createAdoptante(AdoptanteInDTO dto) {
 
-        // 4. PASO A: Crear la cuenta de seguridad para el login
         RegisterRequestDto accountDto = new RegisterRequestDto();
         accountDto.setUsername(dto.getRut());
         accountDto.setPassword(dto.getRut());
@@ -37,7 +36,6 @@ public class AdoptanteServiceImpl implements AdoptanteService {
 
         authService.register(accountDto);
 
-        // 5. PASO B: Crear el registro de adoptante
         Adoptante adoptante = new Adoptante();
         adoptante.setNombreCompleto(dto.getNombreCompleto());
         adoptante.setRut(dto.getRut());

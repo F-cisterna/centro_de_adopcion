@@ -52,7 +52,6 @@ public class AuthServiceImpl implements AuthService {
 
         String token = jwtUtil.generateToken(user.getUsername(), roles);
         
-        // Asignar rol al DTO. Si tiene varios, devolvemos el primero o principal.
         String principalRole = roles.isEmpty() ? "" : roles.get(0);
         
         return new AuthResponseDto(user.getUsername(), user.getEmail(), principalRole, token);
@@ -72,7 +71,6 @@ public class AuthServiceImpl implements AuthService {
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        // Asignar rol del request o por defecto
         String roleName = request.getRol() != null && !request.getRol().isEmpty() ? request.getRol() : "ROLE_USER";
         Role role = roleRepository.findByName(roleName)
                 .orElseGet(() -> {
