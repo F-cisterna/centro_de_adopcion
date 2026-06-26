@@ -180,7 +180,7 @@ const GestionSolicitudes = () => {
                     <input type="date" name="fechaSolicitud" value={form.fechaSolicitud} onChange={handleChange}
                       style={{width: '100%', boxSizing: 'border-box', padding: '12px 16px', backgroundColor: '#F9F9F9', border: '1.5px solid #EEEEEE', borderRadius: '12px', fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#1A1A1A', outline: 'none'}}/>
                   </div>
-                  <div style={{gridColumn: 'span 2'}}>
+                  <div style={{gridColumn: '1 / -1'}}>
                     <label style={{display: 'block', fontFamily: 'Inter, sans-serif', fontSize: '11px', fontWeight: '600', color: '#999999', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px'}}>Observaciones</label>
                     <input type="text" name="observaciones" value={form.observaciones} onChange={handleChange} placeholder="Observaciones opcionales..."
                       style={{width: '100%', boxSizing: 'border-box', padding: '12px 16px', backgroundColor: '#F9F9F9', border: '1.5px solid #EEEEEE', borderRadius: '12px', fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#1A1A1A', outline: 'none'}}/>
